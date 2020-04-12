@@ -220,6 +220,426 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/CppTutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/12/CppTutorial/" class="post-title-link" itemprop="url">C++笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-12 09:48:18 / Modified: 11:53:04" itemprop="dateCreated datePublished" datetime="2019-08-12T09:48:18+08:00">2019-08-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="C-基础语法"><a href="#C-基础语法" class="headerlink" title="C++基础语法"></a>C++基础语法</h2><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>关键字：<code>namespace</code></p>
+<p>命名空间将全局作用域分成不同部分，不同命名空间中的标识符可以相同，命名空间可以<code>嵌套</code>，全局作用域也叫做默认命名空间。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A &#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> B &#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A::x;       <span class="comment">// 访问A命名空间的x变量</span></span><br><span class="line">A::fun();   <span class="comment">// 调用A命名空间的fun函数</span></span><br><span class="line">B::x;</span><br><span class="line">B::fun();</span><br></pre></td></tr></table></figure>
+
+<h3 id="引用-amp-指针"><a href="#引用-amp-指针" class="headerlink" title="引用 &amp; 指针"></a>引用 &amp; 指针</h3><ul>
+<li><p>引用是变量的别名，不存在空引用，必须初始化！</p>
+</li>
+<li><p>一旦引用被初始化为一个对象，就不能被指向到另一个对象；指针可以在任何时候指向到另一个对象。</p>
+</li>
+<li><p>引用必须在创建时被初始化；指针可以在任何时间被初始化。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基本数据类型的引用</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> &amp; b = a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构体的引用</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">&#125; Coor;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">C语言结构体只是一种数据的集合，不作为变量类型，定义变量时仍需要使用struct关键字；C++则认为结构体是一种数据变量；</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">Coor c1;</span><br><span class="line">Coor &amp; c = c1;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指针类型的引用： 类型 *&amp; 指针引用名 = 指针；</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> * p = &amp;a;</span><br><span class="line"><span class="keyword">int</span> *&amp; q = p;  <span class="comment">// 指针的引用</span></span><br><span class="line">*q = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ul>
+<li><p>const与基本数据类型</p>
+</li>
+<li><p>const与指针</p>
+<ul>
+<li><p>底层<code>const</code>（*前，指向对象的值不能修改）</p>
+</li>
+<li><p>顶层<code>const</code>（*后，所存储的内存地址不能变）</p>
+</li>
+</ul>
+</li>
+<li><p>const与引用</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> x = <span class="number">3</span>;            <span class="comment">// 常量x</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="literal">nullptr</span>;     <span class="comment">// *p是常量</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> *p = <span class="literal">nullptr</span>;     <span class="comment">// *p是常量</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p = <span class="literal">nullptr</span>;    <span class="comment">// p是常量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
+<li><p>申请内存<code>new</code> （注意内存分配失败）</p>
+</li>
+<li><p>释放内存<code>delete</code></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> * p = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="keyword">delete</span> p;</span><br><span class="line">p = null;   <span class="comment">// 删除了指针p所指的对象，但指针变量p本身仍存在</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> * arr = <span class="keyword">new</span> <span class="keyword">int</span> [<span class="number">10</span>];</span><br><span class="line"><span class="keyword">delete</span> [] arr;</span><br><span class="line">arr = null;</span><br><span class="line"></span><br><span class="line"><span class="comment">// C语言方式：malloc函数和free函数</span></span><br><span class="line">(<span class="keyword">void</span> *) <span class="built_in">malloc</span>(<span class="keyword">size_t</span> size);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> * memeblock)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
+<li>数据封装</li>
+</ul>
+<p>数据封装是一种把数据和操作数据的函数捆绑在一起的机制；</p>
+<ul>
+<li>数据抽象</li>
+</ul>
+<p>数据抽象是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制；</p>
+<h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><ul>
+<li><p>访问限定符</p>
+<ul>
+<li>public</li>
+<li>protected</li>
+<li>private</li>
+</ul>
+</li>
+<li><p>对象实例化</p>
+<ul>
+<li>从栈实例化</li>
+<li>从堆实例化</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    Node * left;</span><br><span class="line">    Node * right;</span><br><span class="line">    Node(<span class="keyword">int</span> x) : val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">node</span><span class="params">(<span class="number">2</span>)</span></span>;           <span class="comment">// 栈实例化</span></span><br><span class="line">Node * p = <span class="keyword">new</span> Node(<span class="number">2</span>); <span class="comment">// 堆实例化</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>内存分区<ol>
+<li>栈区：<code>int x = 0; int *p = nullptr;</code></li>
+<li>堆区：<code>int *p = new int[20];</code></li>
+<li>全局区：存储全局变量及静态变量</li>
+<li>常量区：<code>string str = &quot;Hello&quot;;</code></li>
+<li>代码区：存储逻辑代码的二进制数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><ul>
+<li><p>定义在<code>public</code>说明符之后的成员在整个程序内可以被访问，<code>public</code>成员定义类的<code>接口</code>；</p>
+</li>
+<li><p>定义在<code>private</code>说明符之后的成员可以被类的成员函数访问，但是不能被使用该类的代码访问，<code>private</code>封装了（隐藏了）类的实现细节；</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Student(<span class="built_in">string</span> name, <span class="keyword">int</span> age) : _name(name), _age(age) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;_age = age;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> _age;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> _name;</span><br><span class="line">    <span class="keyword">int</span> _age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h3><p>内联函数：<code>inline</code>关键字，<code>编译</code>时用函数体代码和实参代替函数调用语句；</p>
+<p>对于类内定义的函数，编译器优先编译为内联函数；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;  <span class="comment">// 关键字inline必须与函数定义在一起  </span></span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><ul>
+<li><p>构造函数初始化列表</p>
+<ul>
+<li>默认构造函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student() &#123;&#125;</span><br><span class="line">Student(name = <span class="string">"Jim"</span>, age = <span class="number">20</span>) &#123;_name = name; _age = age;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化列表</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student(<span class="built_in">string</span> name, <span class="keyword">int</span> age) : _name(name), _age(age) &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化列表特性</p>
+<ul>
+<li>初始化列表先于构造函数执行；</li>
+<li>初始化列表只能用于构造函数；</li>
+<li>初始化列表可以同时初始化多个数据成员；</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Vector/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/04/Vector/" class="post-title-link" itemprop="url">Vector</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-04 00:38:39" itemprop="dateCreated datePublished" datetime="2019-08-04T00:38:39+08:00">2019-08-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-04-12 16:56:24" itemprop="dateModified" datetime="2020-04-12T16:56:24+08:00">2020-04-12</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>To be done.</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/binary-tree-traverse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/03/binary-tree-traverse/" class="post-title-link" itemprop="url">二叉树遍历</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-03 09:26:12 / Modified: 16:58:13" itemprop="dateCreated datePublished" datetime="2019-08-03T09:26:12+08:00">2019-08-03</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>二叉树的前序、中序、后序遍历实现</p>
+<h2 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrderRec</span><span class="params">(Node * node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;val;</span><br><span class="line">        preOrderRec(node-&gt;left);</span><br><span class="line">        preOrderRec(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrderRec</span><span class="params">(Node * node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        inOrderRec(node-&gt;left);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data;</span><br><span class="line">        inOrderRec(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrderRec</span><span class="params">(Node * node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        postOrderRec(node-&gt;left);</span><br><span class="line">        postOrderRec(node-&gt;right);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="非递归版本"><a href="#非递归版本" class="headerlink" title="非递归版本"></a>非递归版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrderIte</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node *&gt; s;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        s.push(root);</span><br><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">            Node * cur = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cur-&gt;data;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) s.push(cur-&gt;right);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) s.push(cur-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrderIte</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node *&gt; s;</span><br><span class="line">    Node * cur = root;</span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">nullptr</span> || !s.empty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            s.push(cur);</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        Node * node = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data;</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;right != <span class="literal">nullptr</span>) cur = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrderIte</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node *&gt; s;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        s.push(root);</span><br><span class="line">        Node * pre = <span class="literal">nullptr</span>;   <span class="comment">// 记录前一个被访问的节点</span></span><br><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">            Node * cur = s.top();</span><br><span class="line">            <span class="keyword">if</span> ((cur-&gt;left == <span class="literal">nullptr</span> &amp;&amp; cur-&gt;right == <span class="literal">nullptr</span>) || cur-&gt;left == pre || cur-&gt;right == pre) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; cur-&gt;data;</span><br><span class="line">                s.pop();</span><br><span class="line">                pre = cur;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) s.push(cur-&gt;right);</span><br><span class="line">                <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) s.push(cur-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p>基于类模板实现二叉树的前序、中序、后序遍历</p>
+<h3 id="Node类"><a href="#Node类" class="headerlink" title="Node类"></a>Node类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T data;</span><br><span class="line">    Node&lt;T&gt; * left;</span><br><span class="line">    Node&lt;T&gt; * right;</span><br><span class="line">    Node(T x) : data(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tree类"><a href="#Tree类" class="headerlink" title="Tree类"></a>Tree类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Tree();</span><br><span class="line">    ~Tree();</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrderRec</span><span class="params">()</span></span>;     <span class="comment">// 前序遍历递归版，调用preOrderRec(node)函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrderRec</span><span class="params">()</span></span>;      <span class="comment">// 中序遍历递归版</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrderRec</span><span class="params">()</span></span>;    <span class="comment">// 后序遍历递归版</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrderIte</span><span class="params">()</span></span>;     <span class="comment">// 前序遍历迭代版</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrderIte</span><span class="params">()</span></span>;      <span class="comment">// 中序遍历迭代版</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrderIte</span><span class="params">()</span></span>;    <span class="comment">// 后序遍历迭代版</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Node&lt;T&gt; * root;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(Node&lt;T&gt; * node)</span></span>;    <span class="comment">// 删除以node为根的子树</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrderRec</span><span class="params">(Node&lt;T&gt; * node)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrderRec</span><span class="params">(Node&lt;T&gt; * node)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrderRec</span><span class="params">(Node&lt;T&gt; * node)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数实现</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Tree&lt;T&gt;::Tree() &#123;   <span class="comment">// 简单测试，构造函数直接建立一棵树</span></span><br><span class="line">    <span class="comment">// root</span></span><br><span class="line">    root = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">2</span>);</span><br><span class="line">    <span class="comment">// depth = 1</span></span><br><span class="line">    root-&gt;left = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">1</span>);</span><br><span class="line">    root-&gt;right = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// depth = 2</span></span><br><span class="line">    root-&gt;left-&gt;left = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">4</span>);</span><br><span class="line">    root-&gt;left-&gt;right = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">5</span>);</span><br><span class="line">    root-&gt;right-&gt;right = <span class="keyword">new</span> Node&lt;T&gt;(<span class="number">7</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Tree&lt;T&gt;::~Tree() &#123;</span><br><span class="line">    remove(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::remove(Node&lt;T&gt; * node) &#123;</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;left != <span class="literal">nullptr</span>) remove(node-&gt;left);</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;right != <span class="literal">nullptr</span>) remove(node-&gt;right);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Deleting node "</span> &lt;&lt; node-&gt;data &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">delete</span> node;</span><br><span class="line">    node = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::preOrderRec() &#123;</span><br><span class="line">    preOrderRec(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::preOrderRec(Node&lt;T&gt; * node) &#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data; <span class="comment">// 访问节点（打印）</span></span><br><span class="line">        preOrderRec(node-&gt;left);</span><br><span class="line">        preOrderRec(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::inOrderRec() &#123;</span><br><span class="line">    inOrderRec(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::inOrderRec(Node&lt;T&gt; * node) &#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        inOrderRec(node-&gt;left);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data; <span class="comment">// 访问节点（打印）</span></span><br><span class="line">        inOrderRec(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::postOrderRec() &#123;</span><br><span class="line">    postOrderRec(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::postOrderRec(Node&lt;T&gt; * node) &#123;</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        postOrderRec(node-&gt;left);</span><br><span class="line">        postOrderRec(node-&gt;right);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data; <span class="comment">// 访问节点（打印）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::preOrderIte() &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node&lt;T&gt; *&gt; s;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        s.push(root);</span><br><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">            Node&lt;T&gt; * cur = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cur-&gt;data;  <span class="comment">// 访问节点（打印）</span></span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) s.push(cur-&gt;right);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) s.push(cur-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::inOrderIte() &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node&lt;T&gt; *&gt; s;</span><br><span class="line">    Node&lt;T&gt; * cur = root;</span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">nullptr</span> || !s.empty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            s.push(cur);</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;T&gt; * node = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;data; <span class="comment">// 访问节点（打印）</span></span><br><span class="line">        <span class="keyword">if</span> (node-&gt;right != <span class="literal">nullptr</span>) cur = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Tree&lt;T&gt;::postOrderIte() &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Node&lt;T&gt; *&gt; s;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        s.push(root);</span><br><span class="line">        Node&lt;T&gt; * pre = <span class="literal">nullptr</span>;    <span class="comment">// 记录前一个被访问的节点</span></span><br><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">            Node&lt;T&gt; * cur = s.top();</span><br><span class="line">            <span class="keyword">if</span> ((cur-&gt;left == <span class="literal">nullptr</span> &amp;&amp; cur-&gt;right == <span class="literal">nullptr</span>) || cur-&gt;left == pre || cur-&gt;right == pre) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; cur-&gt;data;  <span class="comment">// 访问节点（打印）</span></span><br><span class="line">                s.pop();</span><br><span class="line">                pre = cur;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) s.push(cur-&gt;right);</span><br><span class="line">                <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) s.push(cur-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/Git-Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -256,7 +676,7 @@
                 
               
 
-              <time title="Created: 2019-08-03 00:38:53 / Modified: 09:03:23" itemprop="dateCreated datePublished" datetime="2019-08-03T00:38:53+08:00">2019-08-03</time>
+              <time title="Created: 2019-08-03 00:38:53 / Modified: 09:28:59" itemprop="dateCreated datePublished" datetime="2019-08-03T00:38:53+08:00">2019-08-03</time>
             </span>
           
             
@@ -271,7 +691,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git笔记/" itemprop="url" rel="index"><span itemprop="name">Git笔记</span></a></span>
 
                 
                 
@@ -382,7 +802,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-03 09:03:29" itemprop="dateModified" datetime="2019-08-03T09:03:29+08:00">2019-08-03</time>
+                <time title="Modified: 2019-08-03 09:28:55" itemprop="dateModified" datetime="2019-08-03T09:28:55+08:00">2019-08-03</time>
               </span>
             
           
@@ -394,7 +814,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo笔记/" itemprop="url" rel="index"><span itemprop="name">Hexo笔记</span></a></span>
 
                 
                 
@@ -481,7 +901,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -500,7 +920,11 @@
         
           
         
-        <span class="site-state-item-count">2</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
@@ -546,7 +970,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
